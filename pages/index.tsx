@@ -70,9 +70,3 @@ export default function Home(props: any) {
     </div>
   )
 }
-
-// export async function getServerSideProps() {
-//   return {
-//     props: { indexData: 'indexData' }, // will be passed to the page component as props
-//   }
-// }
