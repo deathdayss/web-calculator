@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from './Home.module.scss'
 
-export default function Home() {
+export default function Home(props: any) {
+  console.log('Home props', props)
   return (
     <div className={styles.container}>
       <Head>
@@ -69,3 +70,9 @@ export default function Home() {
     </div>
   )
 }
+
+// export async function getServerSideProps() {
+//   return {
+//     props: { indexData: 'indexData' }, // will be passed to the page component as props
+//   }
+// }
