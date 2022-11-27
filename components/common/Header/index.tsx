@@ -6,6 +6,7 @@ import { SectionId } from '@/data/section/type'
 import { Select } from 'antd'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 const { Option } = Select;
 
@@ -22,6 +23,9 @@ const selectLanguageHandle = (langCode: LanguageCode) => {
 
 const Header = ({ sectionKey }: HeaderProps) => {
     const headerText = languageDisplay.getLangText.Header;
+    useEffect(() => {
+        languageDisplay.setLangCodeFromLocalStorage()
+    }, [])
     return <div id={headerContainerId} className={styles.headerContainer}>
         <div className={styles.itemsContainer}>
             <div></div>
