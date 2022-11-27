@@ -17,15 +17,15 @@ interface HeaderProps {
 }
 
 const headerContainerId = 'header-container'
-const selectLanguageHandle = (langCode: LanguageCode) => {
-    languageDisplay.setLangCode(langCode);
-}
+// const selectLanguageHandle = (langCode: LanguageCode) => {
+//     languageDisplay.setLangCode(langCode);
+// }
 
 const Header = ({ sectionKey }: HeaderProps) => {
     const headerText = languageDisplay.getLangText.Header;
-    useEffect(() => {
-        languageDisplay.setLangCodeFromLocalStorage()
-    }, [])
+    // useEffect(() => {
+    //     languageDisplay.setLangCodeFromLocalStorage()
+    // }, [])
     return <div id={headerContainerId} className={styles.headerContainer}>
         <div className={styles.itemsContainer}>
             <div></div>
@@ -43,9 +43,9 @@ const Header = ({ sectionKey }: HeaderProps) => {
                 })}
             </div>
             <div className={styles.languageContainer}>
-                <Select className={styles.select} getPopupContainer={() => document.getElementById(headerContainerId) as HTMLElement} value={languageDisplay.getLangCode} style={{ width: 120 }} onChange={selectLanguageHandle}>
+                {/* <Select className={styles.select} getPopupContainer={() => document.getElementById(headerContainerId) as HTMLElement} value={languageDisplay.getLangCode} style={{ width: 120 }} onChange={selectLanguageHandle}>
                     {languageCodes.map(key => <Option key={key} value={key}>{commonLocalText.language[key]}</Option>)}
-                </Select>
+                </Select> */}
             </div>
         </div>
     </div>
