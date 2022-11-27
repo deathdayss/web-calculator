@@ -1,0 +1,82 @@
+@use "@/styles/globalVariables";
+
+.headerContainer {
+    height: 4rem;
+    background-color: globalVariables.$theme-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+    .itemsContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .toggleContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .toggleLink {
+                .toggleButton {
+                    color: white;
+                    width: 10rem;
+                    height: 2rem;
+                    border: 0.1rem solid white;
+                    background-color: globalVariables.$gray-1;
+                    transition-property: background-color;
+                    cursor: pointer;
+                }
+
+                .toggleButton:hover {
+                    background-color: globalVariables.$gray-2;
+                    transition-duration: 0.2s;
+                }
+
+                .toggleButton:active {
+                    background-color: globalVariables.$gray-3;
+                    transition-duration: 0.1s;
+                }
+
+                .selectedToggleButton {
+                    background-color: black;
+                }
+
+                .selectedToggleButton:hover {
+                    background-color: black;
+                }
+
+                .selectedToggleButton:focus {
+                    background-color: black;
+                }
+            }
+
+            .toggleLink:not(:last-child) {
+                .toggleButton {
+                    border-right: none;
+                }
+            }
+
+            .toggleLink:first-child {
+                .toggleButton {
+                    border-top-left-radius: 1rem;
+                    border-bottom-left-radius: 1rem;
+                }
+            }
+            .toggleLink:last-child {
+                .toggleButton {
+                    border-top-right-radius: 1rem;
+                    border-bottom-right-radius: 1rem;
+                }
+            }
+        }
+
+        .languageContainer {
+            .select {
+                float: right;
+            }
+        }
+    }
+    .itemsContainer > div {
+        flex: 1 1 0;
+    }
+}
