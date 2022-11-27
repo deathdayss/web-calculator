@@ -1,19 +1,10 @@
-import Header from '@/components/common/Header'
+import ArithmeticMain from '@/components/ArithmeticMain'
+import SectionPage from '@/components/common/SectionPage'
 import { getSectionKeyFromUrl } from '@/helperFunction/url/urlUtil'
 import { GetServerSideProps } from 'next'
 
 export default function Home({ sectionKey }: any) {
-  return (
-    <div>
-      <Header sectionKey={sectionKey}/>
-      <main>
-
-      </main>
-
-      <footer>
-      </footer>
-    </div>
-  )
+  return <SectionPage sectionKey={sectionKey}><ArithmeticMain /></SectionPage>
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
