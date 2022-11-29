@@ -2,10 +2,10 @@ import { languageCountryMap } from "@/data/language/data";
 import { LanguageCode } from "@/data/language/type";
 
 export function findLanguageCodeByCountryCode(countryCode: string) {
-    if (languageCountryMap[LanguageCode.English].includes(countryCode)) {
-        return LanguageCode.English
+    if (languageCountryMap[LanguageCode.SimplifiedChiense].includes(countryCode)) {
+        return LanguageCode.SimplifiedChiense
     }
     else {
-        return LanguageCode.SimplifiedChiense
+        return LanguageCode.English
     }
 }
