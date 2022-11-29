@@ -1,5 +1,5 @@
 import Header from "@/components/common/Header";
-import { getSectionKeyFromUrl } from "@/helperFunction/url/urlUtil";
+import commonDataFetch from "@/helperFunction/SSR/common";
 import { GetServerSideProps } from "next";
 
 
@@ -16,5 +16,5 @@ export default function ExchangeRate({ sectionKey }: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    return getSectionKeyFromUrl(context.resolvedUrl)
+    return commonDataFetch(context)
 }

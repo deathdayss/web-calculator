@@ -1,8 +1,9 @@
-import { languageCodes, languageDisplay } from '@/data/language/data'
+import { languageCodes } from '@/data/language/data'
 import { LanguageCode } from '@/data/language/type'
 import { commonLocalText } from '@/data/localizationText/data'
 import { sectionIds } from '@/data/section/data'
 import { SectionId } from '@/data/section/type'
+import { useLanguageStore } from '@/data/withMobx/Language/LanguageStoreProvider'
 import { Select } from 'antd'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
@@ -18,12 +19,13 @@ interface HeaderProps {
 
 const headerContainerId = 'header-container';
 const isUsinglanguageSelect = true;
-const selectLanguageHandle = (langCode: LanguageCode) => {
-    languageDisplay.setLangCode(langCode);
-}
 
 const Header = ({ sectionKey }: HeaderProps) => {
+    const languageDisplay = useLanguageStore()
     const headerText = languageDisplay.getLangText.Header;
+    const selectLanguageHandle = (langCode: LanguageCode) => {
+        languageDisplay.setLangCodeClient(langCode);
+    }
     useEffect(() => {
         if (isUsinglanguageSelect) {
             languageDisplay.setLangCodeFromLocalStorage()

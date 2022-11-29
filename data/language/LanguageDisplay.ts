@@ -15,13 +15,13 @@ export default class LanguageDisplay {
             languageCodes: false,
             getLangCode: computed,
             getLangText: computed,
-            setLangCode: action,
+            setLangCodeFromServer: action,
+            setLangCodeClient: action,
             setLangCodeFromLocalStorage: action
         })
     }
 
     get getLangCode() {
-        console.log('get lang code', this.langCode)
         return this.langCode
     }
 
@@ -29,7 +29,11 @@ export default class LanguageDisplay {
         return languageTextMapping[this.getLangCode]
     }
 
-    setLangCode(langCode: LanguageCode) {
+    setLangCodeFromServer(langCode: LanguageCode) {
+        this.langCode = langCode
+    }
+
+    setLangCodeClient(langCode: LanguageCode) {
         if (localStorage) {
             localStorage.setItem(LocalStorageKey.WebCalculatorLangCode, langCode);
         }
@@ -40,6 +44,7 @@ export default class LanguageDisplay {
         const storeLangCode = localStorage.getItem(LocalStorageKey.WebCalculatorLangCode) as LanguageCode;
         if (storeLangCode && languageCodes.includes(storeLangCode) && storeLangCode !== this.langCode) {
             this.langCode = storeLangCode
+            return true;
         }
     }
 }

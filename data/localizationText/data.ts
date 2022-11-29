@@ -7,6 +7,11 @@ export const englishLocalText = {
             arithmetic: 'Arithmetic',
             'exchange-rate': 'Exchange Rate'
         }
+    },
+    message: {
+        error: {
+            positionError: 'The target position does not exist'
+        }
     }
 }
 
@@ -17,6 +22,11 @@ export const simplifiedChineseLocalText: LocalizationText = {
         toggleButton: {
             arithmetic: '算术',
             'exchange-rate': '汇率'
+        }
+    },
+    message: {
+        error: {
+            positionError: '指定的位置不存在'
         }
     }
 }
