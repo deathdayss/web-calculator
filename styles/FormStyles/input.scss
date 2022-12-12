@@ -1,0 +1,9 @@
+@use "@/styles/globalVariables";
+
+@mixin inputBar {
+    height: 2.5rem;
+    border: 0.1rem solid globalVariables.$theme-color;
+    border-radius: 0.6rem;
+    padding: 0 0.5rem;
+    font-size: 1.2rem;
+}
