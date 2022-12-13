@@ -1,3 +1,4 @@
+import ArithmeticFormula from "@/data/ArithmeticFormula/ArithmeticFormula";
 import { arithmeticFormula } from "@/data/ArithmeticFormula/data";
 import { getInputValue } from "@/helperFunction/component/Form/input";
 import { ChangeEventHandler, Dispatch, RefObject, SetStateAction, useLayoutEffect, useRef, useState } from "react";
@@ -20,7 +21,7 @@ export const useInputValue = (value: string | undefined, getValue: (() => string
     return [inputValue, onChange ? onChange : setInternalValue] as UseInputValueReturn;
 }
 
-export const useArithmeticCell = (row: number, column: number) => {
+export const useArithmeticCell = (arithmeticFormula: ArithmeticFormula, row: number, column: number) => {
     const onFocus = () => {
         if (row === arithmeticFormula.rowLength - 1) {
             arithmeticFormula.addNewRow()

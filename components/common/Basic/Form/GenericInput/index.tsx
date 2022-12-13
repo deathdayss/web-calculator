@@ -16,6 +16,7 @@ const getWarningMessage = (value: string | undefined, validation: InputValidatio
     }
     for (const val of validation) {
         if (val.rule instanceof RegExp) {
+            val.rule.lastIndex = 0
             if (!val.rule.test(value)) {
                 return val.warningMessage
             }
@@ -86,12 +87,12 @@ const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
     useInputFormSubmit(formName, realTimeWarning, realTimeWarningMessage, setWarningMessage)
     return <span className={className ?? styles.GenericInputContainer}>
         <input value={inputValue}
-        autoFocus={autoFocus}
-        onChange={setInputValue} 
-        className={inputClassName ?? styles.input}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        ref={ref} autoComplete="off" name={name} />
+            autoFocus={autoFocus}
+            onChange={setInputValue}
+            className={inputClassName ?? styles.input}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            ref={ref} autoComplete="off" name={name} />
         {warningMessage ? <div className={warningMessageClassName ?? styles.message}>{warningMessage}</div> : null}
     </span>
 })

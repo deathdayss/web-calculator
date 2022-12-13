@@ -11,7 +11,7 @@ const ArithmeticMain = () => {
     const ref = useRef<HTMLInputElement>(null)
     // const ref = React.createRef<HTMLButtonElement>()
     return <GenericForm name="formName">
-        <NumberCell row={0} column={0} />
+        <NumberCell arithmeticFormula={arithmeticFormula} row={0} column={0} />
     </GenericForm>;
 }
 
