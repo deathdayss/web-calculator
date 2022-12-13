@@ -1,5 +1,6 @@
 import { useInputValue } from "@/components/hooks/Form/input"
-import { ChangeEventHandler, forwardRef, useEffect, useState } from "react"
+import { observer } from "mobx-react-lite"
+import { ChangeEventHandler, FocusEventHandler, forwardRef, useEffect, useState } from "react"
 import styles from './index.module.scss'
 
 export const GENERIC_INPUT_DISPLAY_NAME = 'GenericInput'
@@ -7,19 +8,6 @@ export const GENERIC_INPUT_DISPLAY_NAME = 'GenericInput'
 interface InputValidation {
     rule: ((value: string | undefined) => boolean) | RegExp
     warningMessage: string
-}
-
-interface GenericInputProps {
-    value?: string | undefined,
-    getValue?: (() => string | undefined) | undefined
-    onChange?: ChangeEventHandler<HTMLInputElement> | undefined,
-    formName?: string | undefined,
-    name?: string | undefined
-    realTimeWarning?: boolean | undefined,
-    validation?: InputValidation[] | undefined,
-    className?: string | undefined,
-    inputClassName?: string | undefined,
-    warningMessageClassName?: string | undefined
 }
 
 const getWarningMessage = (value: string | undefined, validation: InputValidation[] | undefined) => {
@@ -61,10 +49,29 @@ const useInputFormSubmit = (formName: string | undefined, realTimeWarning: boole
     }, [formName, realTimeWarning, realTimeWarningMessage, setWarningMessage])
 }
 
+interface GenericInputProps {
+    value?: string | undefined,
+    getValue?: (() => string | undefined) | undefined
+    onChange?: ChangeEventHandler<HTMLInputElement> | undefined,
+    autoFocus?: boolean,
+    onFocus?: FocusEventHandler<HTMLInputElement> | undefined,
+    onBlur?: FocusEventHandler<HTMLInputElement> | undefined,
+    formName?: string | undefined,
+    name?: string | undefined
+    realTimeWarning?: boolean | undefined,
+    validation?: InputValidation[] | undefined,
+    className?: string | undefined,
+    inputClassName?: string | undefined,
+    warningMessageClassName?: string | undefined
+}
+
 const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
     value,
     getValue,
     onChange,
+    autoFocus,
+    onFocus,
+    onBlur,
     formName,
     name,
     realTimeWarning = true,
@@ -78,8 +85,12 @@ const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
     useInputRealTimeWarning(realTimeWarning, realTimeWarningMessage, setWarningMessage)
     useInputFormSubmit(formName, realTimeWarning, realTimeWarningMessage, setWarningMessage)
     return <span className={className ?? styles.GenericInputContainer}>
-        <input value={inputValue} 
-        onChange={setInputValue} className={inputClassName ?? styles.input}
+        <input value={inputValue}
+        autoFocus={autoFocus}
+        onChange={setInputValue} 
+        className={inputClassName ?? styles.input}
+        onFocus={onFocus}
+        onBlur={onBlur}
         ref={ref} autoComplete="off" name={name} />
         {warningMessage ? <div className={warningMessageClassName ?? styles.message}>{warningMessage}</div> : null}
     </span>
@@ -87,4 +98,4 @@ const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
 
 GenericInput.displayName = GENERIC_INPUT_DISPLAY_NAME
 
-export default GenericInput
+export default observer(GenericInput)
