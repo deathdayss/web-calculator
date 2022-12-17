@@ -1,0 +1,6 @@
+@use "@/styles/FormStyles/input";
+
+.operatorInput {
+    width: 2.8rem;
+    @include input.inputBar;
+}

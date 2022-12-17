@@ -8,9 +8,12 @@ export const englishLocalText = {
             'exchange-rate': 'Exchange Rate'
         }
     },
-    message: {
-        error: {
-            positionError: 'The target position does not exist'
+    form: {
+        rule: {
+            error: {
+                invalidNumber: 'Please input a valid number',
+                invalidOperator: 'Please input a valid operator'
+            }
         }
     }
 }
@@ -24,9 +27,12 @@ export const simplifiedChineseLocalText: LocalizationText = {
             'exchange-rate': '汇率'
         }
     },
-    message: {
-        error: {
-            positionError: '指定的位置不存在'
+    form: {
+        rule: {
+            error: {
+                invalidNumber: '请输入正确的数字',
+                invalidOperator: '请输入正确的操作符'
+            }
         }
     }
 }
