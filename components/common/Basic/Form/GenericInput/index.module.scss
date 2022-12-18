@@ -3,17 +3,16 @@
 
 .GenericInputContainer {
     position: relative;
+    display: inline-block;
     .input {
         width: 15rem;
         @include input.inputBar;
     }
     .input:focus {
-        transition: box-shadow 0.15s;
-        outline: none;
-        box-shadow: 0 0 0.3rem 0.05rem globalVariables.$gray-3;
+        @include input.inputBarFocus
     }
     .message {
-        top: 2.3rem;
+        top: 3rem;
         color: red;
         position: absolute;
     }

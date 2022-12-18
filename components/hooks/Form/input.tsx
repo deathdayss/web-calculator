@@ -1,7 +1,7 @@
 import ArithmeticFormula from "@/data/ArithmeticFormula/ArithmeticFormula";
 import { arithmeticFormula } from "@/data/ArithmeticFormula/data";
 import { getInputValue } from "@/helperFunction/component/Form/input";
-import { ChangeEventHandler, Dispatch, RefObject, SetStateAction, useLayoutEffect, useRef, useState } from "react";
+import { ChangeEventHandler, Dispatch, KeyboardEventHandler, RefObject, SetStateAction, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type UseInternalInputValueReturn = [string, ChangeEventHandler<HTMLInputElement>]
 
@@ -25,6 +25,7 @@ export const useArithmeticCell = (arithmeticFormula: ArithmeticFormula, row: num
     const onFocus = () => {
         if (row === arithmeticFormula.rowLength - 1) {
             arithmeticFormula.addNewRow()
+            arithmeticFormula.setAutoFocusPosition(row, column)
         }
         arithmeticFormula.setPosition(row, column)
     }
@@ -33,5 +34,16 @@ export const useArithmeticCell = (arithmeticFormula: ArithmeticFormula, row: num
     }
     const autoFocus = arithmeticFormula.autoFocusRowIndex === row && arithmeticFormula.autoFocusColumnIndex === column
     const getValue = () => arithmeticFormula.getValueByPosition(row, column)
-    return { onFocus, onBlur, autoFocus, getValue }
+    const firstKeydown = (e: React.KeyboardEvent<HTMLInputElement>, currentValue: string | undefined) => {
+        if (e.key === 'Delete' || e.key === 'Backspace') {
+            if (currentValue === '') {
+                arithmeticFormula.deleteCurrentInput()
+            }
+        }
+        else if (e.key === 'Enter') {
+            arithmeticFormula.setResultByRow(row)
+            e.preventDefault()
+        }
+    }
+    return { onFocus, onBlur, autoFocus, getValue, firstKeydown }
 }

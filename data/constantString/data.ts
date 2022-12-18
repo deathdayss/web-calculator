@@ -1,0 +1,3 @@
+export enum ErrorType {
+    ARITHMETIC_ROW_RESULT_ERROR = 'ARITHMETIC_ROW_RESULT_ERROR'
+}

@@ -1,0 +1,55 @@
+@use "@/styles/globalVariables";
+
+.formulaAreaContainer {
+    .arithmeticRowStyle {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 7rem;
+    }
+    .arithmeticColumnStyle {
+        .resultContainer {
+            height: 100%;
+            padding-left: 5rem;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            .resultError {
+                color: red;
+            }
+        }
+        .clearAllButtonContainer {
+            height: 100%;
+            display: inline-flex;
+            align-items: center;
+            .clearAllButton {
+                color: white;
+                width: 7rem;
+                height: 100%;
+                border: 0.1rem solid white;
+                background-color: globalVariables.$gray-1;
+                transition-property: background-color;
+                cursor: pointer;
+                border-radius: 1rem;
+                font-size: 1.2rem;
+                user-select: none;
+            }
+
+            .clearAllButton:hover {
+                background-color: globalVariables.$gray-2;
+                transition-duration: 0.2s;
+            }
+
+            .clearAllButton:active {
+                background-color: globalVariables.$gray-3;
+                transition-duration: 0.1s;
+            }
+        }
+    }
+    .arithmeticRowStyle:not(:last-child) {
+        margin-bottom: 7rem;
+    }
+    .arithmeticColumnStyle:not(:last-child) {
+        margin-right: 2rem;
+    }
+}

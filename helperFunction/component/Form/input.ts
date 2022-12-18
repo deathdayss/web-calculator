@@ -14,9 +14,9 @@ export function getInputValue(value: string | undefined, getValue: (() => string
     return internalValue;
 }
 
-export function addNextInputByRegExpFirstMatch(arithmeticFormula: ArithmeticFormula, nextValue: string, regExp: RegExp) {
-    const validOperators = nextValue.match(regExp)
-        if (validOperators && validOperators.length > 0) {
-            arithmeticFormula.addNextInput(validOperators[0])
-        }
-}
+// export function addNextInputByRegExpFirstMatch(arithmeticFormula: ArithmeticFormula, nextValue: string, regExp: RegExp) {
+//     const validOperators = nextValue.match(regExp)
+//     if (validOperators && validOperators.length > 0) {
+//         arithmeticFormula.addNextInput(validOperators[0])
+//     }
+// }

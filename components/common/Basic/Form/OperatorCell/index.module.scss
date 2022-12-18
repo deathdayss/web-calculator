@@ -4,3 +4,7 @@
     width: 2.8rem;
     @include input.inputBar;
 }
+
+.operatorInput:focus {
+    @include input.inputBarFocus
+}

@@ -1,19 +1,13 @@
 import { arithmeticFormula } from "@/data/ArithmeticFormula/data";
-import { observable } from "mobx";
 import { observer } from "mobx-react-lite";
-import { useRef, useState } from "react";
+import FormulaArea from "../common/Basic/Form/FormulaArea";
 import GenericForm from "../common/Basic/Form/GenericForm";
-import GenericInput from "../common/Basic/Form/GenericInput";
-import NumberCell from "../common/Basic/Form/NumberCell";
-import OperationCell from "../common/Basic/Form/OperationCell";
+
 
 const ArithmeticMain = () => {
-    const [value, setValue] = useState('')
-    const ref = useRef<HTMLInputElement>(null)
-    // const ref = React.createRef<HTMLButtonElement>()
     return <GenericForm name="formName">
-        <OperationCell arithmeticFormula={arithmeticFormula} row={0} column={0} />
+        <FormulaArea arithmeticFormula={arithmeticFormula} />
     </GenericForm>;
 }
 
-export default ArithmeticMain
+export default observer(ArithmeticMain)

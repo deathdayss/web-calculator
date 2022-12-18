@@ -25,6 +25,7 @@
                     background-color: globalVariables.$gray-1;
                     transition-property: background-color;
                     cursor: pointer;
+                    user-select: none;
                 }
 
                 .toggleButton:hover {

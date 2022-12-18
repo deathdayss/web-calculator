@@ -4,8 +4,8 @@ export const validNumberCellRule = /^\(?(\d*|\d*\.\d*)\)?$/g
 
 export const validOperatorPattern = /\+|\-|\*\*|\*|\/|\%/g
 
-export const invalidOperationCellPattern = /[^\+\-\*\/\%]/g
+export const invalidOperatorCellPattern = /[^\+\-\*\/\%]/g
 
-export const validNumberPattern = /\(?\d+\)?|\(|\d+|\)/g
+export const validNumberPattern = /\(?\d+\)?|\(|\d+/g
 
-export const validOperatorCellPattern = /^\+|\-|\*\*|\*|\/|\%$/g
+export const validOperatorCellPattern = /^(\+|\-|\*\*|\*|\/|\%)?$/g

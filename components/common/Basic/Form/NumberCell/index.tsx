@@ -1,7 +1,6 @@
 import { useArithmeticCell } from "@/components/hooks/Form/input";
 import { invalidNumberCellPattern, validNumberCellRule, validOperatorPattern } from "@/data/regExp/form";
 import { useLanguageStore } from "@/data/withMobx/Language/LanguageStoreProvider";
-import { addNextInputByRegExpFirstMatch } from "@/helperFunction/component/Form/input";
 import { observer } from "mobx-react-lite";
 import { ChangeEventHandler } from "react";
 import GenericInput from "../GenericInput";
@@ -12,7 +11,7 @@ const NumberCell = ({ row, column, arithmeticFormula, maxLength = 20, ...generic
     const errorMessage = useLanguageStore().getLangText.form.rule.error
     const filterOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         const nextValue = e.target.value
-        addNextInputByRegExpFirstMatch(arithmeticFormula, nextValue, validOperatorPattern)
+        arithmeticFormula.addNextInput(nextValue, validOperatorPattern)
         const filteredValue = nextValue.replace(invalidNumberCellPattern, '').substring(0, maxLength)
         arithmeticFormula.setValueByCurrentPosition(filteredValue)
     }

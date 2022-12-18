@@ -63,7 +63,8 @@ interface GenericInputProps {
     validation?: InputValidation[] | undefined,
     className?: string | undefined,
     inputClassName?: string | undefined,
-    warningMessageClassName?: string | undefined
+    warningMessageClassName?: string | undefined,
+    firstKeydown?: (e: React.KeyboardEvent<HTMLInputElement>, value: string | undefined) => void
 }
 
 const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
@@ -79,22 +80,34 @@ const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
     validation,
     className,
     inputClassName,
-    warningMessageClassName }, ref) => {
+    warningMessageClassName,
+    firstKeydown }, ref) => {
     const [inputValue, setInputValue] = useInputValue(value, getValue, onChange)
     const realTimeWarningMessage = getWarningMessage(inputValue, validation)
     const [warningMessage, setWarningMessage] = useState(realTimeWarningMessage)
+    const [hasKeyDown, setHasKoyDown] = useState(false)
     useInputRealTimeWarning(realTimeWarning, realTimeWarningMessage, setWarningMessage)
     useInputFormSubmit(formName, realTimeWarning, realTimeWarningMessage, setWarningMessage)
-    return <span className={className ?? styles.GenericInputContainer}>
+    return <div className={className ?? styles.GenericInputContainer}>
         <input value={inputValue}
             autoFocus={autoFocus}
             onChange={setInputValue}
             className={inputClassName ?? styles.input}
             onFocus={onFocus}
             onBlur={onBlur}
-            ref={ref} autoComplete="off" name={name} />
+            ref={ref} autoComplete="off" name={name}
+            onKeyDown={(e) => {
+                setHasKoyDown(true)
+                if (!hasKeyDown && firstKeydown) {
+                    firstKeydown(e, inputValue)
+                }
+            }}
+            onKeyUp={(e) => {
+                setHasKoyDown(false)
+            }}
+        />
         {warningMessage ? <div className={warningMessageClassName ?? styles.message}>{warningMessage}</div> : null}
-    </span>
+    </div>
 })
 
 GenericInput.displayName = GENERIC_INPUT_DISPLAY_NAME

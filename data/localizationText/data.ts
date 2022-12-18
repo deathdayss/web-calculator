@@ -9,10 +9,14 @@ export const englishLocalText = {
         }
     },
     form: {
+        arithmetic: {
+            clearAllButtonLabel: 'Clear'
+        },
         rule: {
             error: {
                 invalidNumber: 'Please input a valid number',
-                invalidOperator: 'Please input a valid operator'
+                invalidOperator: 'Please input a valid operator',
+                invalidResult: 'Formula with errors'
             }
         }
     }
@@ -28,10 +32,14 @@ export const simplifiedChineseLocalText: LocalizationText = {
         }
     },
     form: {
+        arithmetic: {
+            clearAllButtonLabel: '清除'
+        },
         rule: {
             error: {
                 invalidNumber: '请输入正确的数字',
-                invalidOperator: '请输入正确的操作符'
+                invalidOperator: '请输入正确的操作符',
+                invalidResult: '算式有错误'
             }
         }
     }
