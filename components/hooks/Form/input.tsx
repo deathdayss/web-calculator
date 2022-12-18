@@ -1,6 +1,7 @@
 import ArithmeticFormula from "@/data/ArithmeticFormula/ArithmeticFormula";
 import { arithmeticFormula } from "@/data/ArithmeticFormula/data";
 import { getInputValue } from "@/helperFunction/component/Form/input";
+import { autorun } from "mobx";
 import { ChangeEventHandler, Dispatch, KeyboardEventHandler, RefObject, SetStateAction, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type UseInternalInputValueReturn = [string, ChangeEventHandler<HTMLInputElement>]
@@ -25,25 +26,36 @@ export const useArithmeticCell = (arithmeticFormula: ArithmeticFormula, row: num
     const onFocus = () => {
         if (row === arithmeticFormula.rowLength - 1) {
             arithmeticFormula.addNewRow()
-            arithmeticFormula.setAutoFocusPosition(row, column)
         }
         arithmeticFormula.setPosition(row, column)
     }
     const onBlur = () => {
         arithmeticFormula.blurPosition()
     }
-    const autoFocus = arithmeticFormula.autoFocusRowIndex === row && arithmeticFormula.autoFocusColumnIndex === column
     const getValue = () => arithmeticFormula.getValueByPosition(row, column)
     const firstKeydown = (e: React.KeyboardEvent<HTMLInputElement>, currentValue: string | undefined) => {
         if (e.key === 'Delete' || e.key === 'Backspace') {
             if (currentValue === '') {
-                arithmeticFormula.deleteCurrentInput()
+                e.preventDefault()
+                arithmeticFormula.deleteInputByPosition(row, column)
             }
         }
         else if (e.key === 'Enter') {
             arithmeticFormula.setResultByRow(row)
+        }
+    }
+    const onKeyDownEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
             e.preventDefault()
         }
     }
-    return { onFocus, onBlur, autoFocus, getValue, firstKeydown }
+    const ref = useRef<HTMLInputElement>(null)
+    useEffect(() => {
+        autorun(() => {
+            if (arithmeticFormula.rowIndex === row && arithmeticFormula.columnIndex === column) {
+                ref.current?.focus()
+            }
+        })
+    }, [])
+    return { onFocus, onBlur, getValue, firstKeydown, onKeyDownEvent, ref }
 }

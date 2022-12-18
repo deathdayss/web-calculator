@@ -12,9 +12,9 @@ const OperatorCell = ({ row, column, arithmeticFormula, maxLength = 2, ...generi
     const errorMessage = useLanguageStore().getLangText.form.rule.error
     const filterOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         const nextValue = e.target.value
-        arithmeticFormula.addNextInput(nextValue, validNumberPattern)
         const filteredValue = nextValue.replace(invalidOperatorCellPattern, '').substring(0, maxLength)
-        arithmeticFormula.setValueByCurrentPosition(filteredValue)
+        arithmeticFormula.setValueByPosition(row, column, filteredValue)
+        arithmeticFormula.addNextInput(row, column, nextValue, validNumberPattern)
     }
     return <GenericInput {...genericInputProps}
         {...arithmeticCell}

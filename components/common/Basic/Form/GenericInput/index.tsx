@@ -64,7 +64,8 @@ interface GenericInputProps {
     className?: string | undefined,
     inputClassName?: string | undefined,
     warningMessageClassName?: string | undefined,
-    firstKeydown?: (e: React.KeyboardEvent<HTMLInputElement>, value: string | undefined) => void
+    firstKeydown?: (e: React.KeyboardEvent<HTMLInputElement>, value: string | undefined) => void,
+    onKeyDownEvent?: (e: React.KeyboardEvent<HTMLInputElement>, value: string | undefined) => void,
 }
 
 const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
@@ -81,11 +82,12 @@ const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
     className,
     inputClassName,
     warningMessageClassName,
-    firstKeydown }, ref) => {
+    firstKeydown,
+    onKeyDownEvent }, ref) => {
     const [inputValue, setInputValue] = useInputValue(value, getValue, onChange)
     const realTimeWarningMessage = getWarningMessage(inputValue, validation)
     const [warningMessage, setWarningMessage] = useState(realTimeWarningMessage)
-    const [hasKeyDown, setHasKoyDown] = useState(false)
+    const [hasKeyDown, setHasKeyDown] = useState(false)
     useInputRealTimeWarning(realTimeWarning, realTimeWarningMessage, setWarningMessage)
     useInputFormSubmit(formName, realTimeWarning, realTimeWarningMessage, setWarningMessage)
     return <div className={className ?? styles.GenericInputContainer}>
@@ -97,13 +99,16 @@ const GenericInput = forwardRef<HTMLInputElement, GenericInputProps>(({
             onBlur={onBlur}
             ref={ref} autoComplete="off" name={name}
             onKeyDown={(e) => {
-                setHasKoyDown(true)
+                if (onKeyDownEvent) {
+                    onKeyDownEvent(e, inputValue)
+                }
+                setHasKeyDown(true)
                 if (!hasKeyDown && firstKeydown) {
                     firstKeydown(e, inputValue)
                 }
             }}
             onKeyUp={(e) => {
-                setHasKoyDown(false)
+                setHasKeyDown(false)
             }}
         />
         {warningMessage ? <div className={warningMessageClassName ?? styles.message}>{warningMessage}</div> : null}
