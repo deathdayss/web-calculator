@@ -8,6 +8,9 @@ export const englishLocalText = {
             'exchange-rate': 'Exchange Rate'
         }
     },
+    footer: {
+        devLinkLabel: 'Github Repository'
+    },
     form: {
         arithmetic: {
             clearAllButtonLabel: 'Clear'
@@ -30,6 +33,9 @@ export const simplifiedChineseLocalText: LocalizationText = {
             arithmetic: '算术',
             'exchange-rate': '汇率'
         }
+    },
+    footer: {
+        devLinkLabel: 'Github代码库'
     },
     form: {
         arithmetic: {

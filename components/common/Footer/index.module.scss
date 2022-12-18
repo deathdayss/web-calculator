@@ -1,3 +1,18 @@
+@use "@/styles/globalVariables";
+
 .footer {
+    display: flex;
+    height: 5rem;
     margin-top: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: globalVariables.$gray-4;
+    a {
+        user-select: none;
+        color: rgb(75, 75, 75);
+    }
+
+    a:hover {
+        color: rgb(173, 173, 173);
+    }
 }
